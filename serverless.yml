@@ -1,0 +1,32 @@
+service: photosintese
+
+plugins:
+  - serverless-domain-manager
+  - serverless-offline
+  - serverless-prune-plugin
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, self:custom.defaultStage}
+  profile: ${self:custom.profiles.${self:provider.stage}}
+
+custom:
+  defaultStage: dev
+  domainName:
+    dev: dev-api.photosintese.com.br
+    prod: origin-api.photosintese.com.br
+  customDomain:
+    domainName: ${self:custom.domainName.${opt:stage, self:provider.stage}}
+    certificateArn: arn:aws:acm:us-east-1:372063505513:certificate/34d27ddc-07a4-46c7-8541-d5ca2d16a8a6
+    basePath: ''
+    stage: ${opt:stage, self:provider.stage}
+    createRoute53Record: true
+    endpointType: regional
+  profiles:
+    dev: fumes
+    prod: fumes
+
+functions:
+  hello:
+    handler: interfaces/hello.handler
