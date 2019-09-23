@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline": "sls offline --aws-profile fumes",
+    "migration": "sequelize-cli db:migrate --config src/config/database.js --env development"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "s": "^1.0.0",
+    "@hapi/joi": "^16.1.4",
+    "mariadb": "^2.1.1",
+    "sequelize": "^5.19.0",
+    "sequelize-cli": "^5.5.1",
     "serverless-domain-manager": "^3.3.0",
     "serverless-offline": "^5.11.0",
     "serverless-prune-plugin": "^1.4.1"
