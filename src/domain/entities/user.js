@@ -1,14 +1,23 @@
+const fields = [
+  'type', 'first_name', 'last_name', 'phone', 'email', 'password', 'created_at', 'updated_at', 'deleted_at'
+]
 module.exports = class User {
-  constructor({type, first_name, last_name, phone, email, password, created_at, updated_at, deleted_at}) {
-    this.type = type
-    this.first_name = first_name
-    this.last_name = last_name
-    this.phone = phone
-    this.email = email
-    this.password = password
-    this.created_at = created_at
-    this.updated_at = updated_at
-    this.deleted_at = deleted_at
+  constructor(user) {
+    fields.map(field => {
+     this[field] = user[field]
+    })
+  }
+
+  set(user) {
+    fields.map(field => {
+      this[field] = user[field]
+    })
+  }
+
+  clear() {
+    fields.map(field => {
+      this[field] = ''
+    })
   }
 
   getType() { return this.type }
